@@ -44,6 +44,7 @@ def welcomeScreen():
             # If user presses space or up arrow key then start the game.
             elif event.type == KEYDOWN and (event.type == K_SPACE or event.type == K_UP):
                 return
+            
             else:
                 
                 SCREEN.blit(GROUND_SPRITES['background'],(0,0))
