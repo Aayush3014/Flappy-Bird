@@ -46,4 +46,11 @@ if __name__ == "__main__":
         pygame.image.load('/gallery/sprites/9.png').convert_alpha()
     )
 
+    GROUND_SPRITES['message'] = pygame.image.load('/gallery/sprites/message.png').convert_alpha()
+    GROUND_SPRITES['base'] = pygame.image.load('/gallery/sprites/base.png').convert_alpha()
     
+    # transform.rotate is used for displaying the image of pipe inverted
+    GROUND_SPRITES['pipe'] = (
+    pygame.transform.rotate(pygame.image.load(PIPE).convert_alpha(),180),
+    pygame.image.load(PIPE).convert_alpha()
+    )
