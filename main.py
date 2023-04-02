@@ -104,13 +104,13 @@ def maingame():
             return     
 
         #check for score
-        playerMidPos = playerx + GAME_SPRITES['player'].get_width()/2
+        playerMidPos = playerx + GROUND_SPRITES['player'].get_width()/2
         for pipe in upperPipes:
-            pipeMidPos = pipe['x'] + GAME_SPRITES['pipe'][0].get_width()/2
+            pipeMidPos = pipe['x'] + GROUND_SPRITES['pipe'][0].get_width()/2
             if pipeMidPos<= playerMidPos < pipeMidPos +4:
                 score +=1
                 print(f"Your score is {score}") 
-                GAME_SOUNDS['point'].play()
+                GROUND_SOUNDS['point'].play()
 
 def getRandomPipe():
     """
