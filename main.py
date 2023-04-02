@@ -53,7 +53,69 @@ def welcomeScreen():
                 SCREEN.blit(GROUND_SPRITES['base'],(basex,GROUNDY))
                 pygame.display.update()
                 FPSCLOCK.tick(FPS)
-                
+
+def maingame():
+    score = 0
+    playerx = int(SCREENWIDTH/5)
+    playery = int(SCREENWIDTH/2)
+    basex = 0
+
+    # Create 2 pipes for blitting on the screen
+    newPipe1 = getRandomPipe()
+    newPipe2 = getRandomPipe()
+
+    # list for upper pipes
+    upperPipes = [
+        {'x':SCREENWIDTH+200,'y':newPipe1[0]['y']},
+        {'x':SCREENWIDTH+200+(SCREENWIDTH/2),'y':newPipe2[1]['y']}
+    ]
+
+    # list for lower pipes
+    lowerPipes = [
+        {'x':SCREENWIDTH+200,'y':newPipe1[0]['y']},
+        {'x':SCREENWIDTH+200+(SCREENWIDTH/2),'y':newPipe2[1]['y']}
+    ]
+    
+    
+    pipeVelX = -4
+
+    playerVelY = -9
+    playerMaxVelY = 10
+    playerMinVelY = -8
+    playerAccY = 1
+
+    playerFlapAccv = -8 # velocity while flapping
+    playerFlapped = False # It is true only when the bird is flapping
+
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN and (event.key == K_SPACE or event.key == K_UP):
+                if playery > 0:
+                    playerVelY = playerFlapAccv
+                    playerFlapped = True
+                    GROUND_SOUNDS['wing'].play()
+
+def getRandomPipe():
+    """
+    Generate random pipes one is from top and second is from bottom for blitting
+    """
+    pipeHeight = GROUND_SPRITES['pipe'][0].get_height()
+    offset = SCREENHEIGHT/3
+    y2 = offset + random.randrange(0,int(SCREENHEIGHT-GROUND_SPRITES['base'].get_height()-1.2*offset))
+    pipeX = SCREENWIDTH+10
+    y1 = pipeHeight-y2+offset
+
+    pipe = [
+        {'x':pipeX,'y':-y1},
+        {'x':pipeX,'y':y2}
+    ]
+    return pipe
+
+
 if __name__ == "__main__":
     
     # This is the main point from where our game will start.
